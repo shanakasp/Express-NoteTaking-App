@@ -20,6 +20,15 @@ app.get("/notes", (req, res) => {
   });
 });
 
+app.get("/notes/:id", (req, res) => {
+  const id = +req.params.id;
+  const note = notes.find((note) => note.id === id);
+  if (!note) {
+    res.status(404).send("Note not found");
+    return;
+  }
+  res.send(note);
+});
 const port = 3000;
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
